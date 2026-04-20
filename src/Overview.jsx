@@ -1,30 +1,48 @@
-function Overview() {
+import React, { useState } from 'react';
+
+function Overview({ 
+  userName = "Ayoub", 
+  balance = "12,500", 
+  income = "+4,200", 
+  expenses = "-1,800", 
+  cardCount = "2" 
+}) {
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true);
+
   return (
     <section className="dashboard-section active">
       <div className="section-header">
-        <h2>Bonjour, Ayoub 👋</h2>
+        <h2>Bonjour, {userName} </h2>
         <p>{new Date().toLocaleDateString()}</p>
       </div>
 
       <div className="summary-cards">
         <div className="summary-card">
-          <span>Solde disponible</span>
-          <h3>12,500 MAD</h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <span>Solde disponible</span>
+            <button 
+              onClick={() => setIsBalanceVisible(!isBalanceVisible)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem' }}
+            >
+              {isBalanceVisible ? "👁️" : "🙈"}
+            </button>
+          </div>
+          <h3>{isBalanceVisible ? `${balance} MAD` : "**** MAD"}</h3>
         </div>
 
         <div className="summary-card">
           <span>Revenus</span>
-          <h3>+4,200 MAD</h3>
+          <h3>{income} MAD</h3>
         </div>
 
         <div className="summary-card">
           <span>Dépenses</span>
-          <h3>-1,800 MAD</h3>
+          <h3>{expenses} MAD</h3>
         </div>
 
         <div className="summary-card">
           <span>Cartes</span>
-          <h3>2</h3>
+          <h3>{cardCount}</h3>
         </div>
       </div>
 
