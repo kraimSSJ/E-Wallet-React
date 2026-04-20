@@ -1,15 +1,33 @@
-function Center() {
+import React, { useState } from 'react';
+
+function Center({ 
+  heroTitle = "E-Wallet", 
+  heroText = "Gérez vos finances facilement et en toute sécurité." 
+}) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <main className="hero">
       <div className="hero-content">
-        <h1>E-Wallet</h1>
+        <h1>{isLoggedIn ? "Bienvenue !" : heroTitle}</h1>
         <p>
-          Gérez vos finances facilement et en toute sécurité.
+          {isLoggedIn ? "Heureux de vous revoir. Votre portefeuille est à jour." : heroText}
         </p>
 
         <div className="buttons">
-          <button className="btn btn-primary">Login</button>
-          <button className="btn btn-secondary">Sign in</button>
+          <button 
+            className="btn btn-primary" 
+            onClick={() => setIsLoggedIn(true)}
+          >
+            {isLoggedIn ? "Mon Profil" : "Login"}
+          </button>
+          
+          <button 
+            className="btn btn-secondary" 
+            onClick={() => setIsLoggedIn(false)}
+          >
+            {isLoggedIn ? "Déconnexion" : "Sign in"}
+          </button>
         </div>
       </div>
 
